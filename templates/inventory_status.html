@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Inventory Status</title>
+{% endblock %}
+
+{% block body %}
+<h1>{{book[3]}}</h1><br>
+<p>ISBN Price Stock</p>
+<p><a href="{{ url_for('books', isbn=book[0]) }}">{{book[0]}}</a> {{book[1]}} {{book[2]}}</p>
+
+{%if book[2] > 0%}
+<p>In Stock</p>
+<form action="{{ url_for('inventory_status_add_copy', isbn=book[0]) }}" method="POST">
+        <input type="submit" value="Add Copy">
+</form><br>
+<form action="{{ url_for('inventory_status_add_copy', isbn=book[0]) }}" method="POST">
+        <input type="number" name="copies" min="1">
+        <input type="submit" value="Add Specified Copies">
+</form><br>
+<form action="{{ url_for('inventory_status_add_copy', isbn=book[0]) }}" method="POST">
+        <input type="number" name="removals" min="1">
+        <input type="submit" value="Remove Specified Copies">
+</form><br>
+<form action="{{ url_for('inventory_status_reserve_copies', isbn=book[0]) }}" method="POST">
+        <input type="number" name="reserves" min="1">
+        <input type="submit" value="Reserve Specified Copies">
+</form><br>
+<form action="{{ url_for('to_shopping_cart',isbn=book[0]) }}" method="POST">
+        <input type="submit" value="Add to Cart">
+</form>
+{%else%}
+<p>Out of stock</p><br>
+<form action="{{ url_for('inventory_status_add_copy', isbn=book[0]) }}" method="POST">
+        <input type="number" name="copies" min="1">
+        <input type="submit" value="Add Specified Copies">
+</form><br>
+<form action="{{ url_for('add_to_waitlist',isbn=book[0]) }}" method="POST">
+        <input type="submit" value="Add to Waitlist">
+</form>
+{%endif%}
+
+<p><a href="{{ url_for('inventory') }}">Back</a></p>
+<p><a href="{{ url_for('home') }}">Home</a></p>
+{% endblock %}

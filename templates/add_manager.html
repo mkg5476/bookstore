@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Add Managers</title>
+{% endblock %}
+
+{% block body %}
+<h1>You may add managers here.</h1><br>
+<p>See list of managers <a href="{{ url_for('manager_list') }}">here</a></p><br>
+<p>Add these to users to Managers:
+        <form action="/add_manager" method="POST">
+                <select name="users">
+                        {%for i in range(0, len)%}
+                        <option value={{users[i]}}>{{users[i]}}</option>
+                        {%endfor%}
+                </select>
+                <input type="submit" name="users" value="Add Manager">
+        </form>
+</p><br>
+<h2>You selected {{message}}</h2>
+<p><a href="{{ url_for('home') }}">Back</a></p>
+
+{% endblock %}

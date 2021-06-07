@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Comments by Usefulness</title>
+{% endblock %}
+
+{% block body %}
+{{message}}
+{%if len > 0%}
+<ol>
+        {%for i in range (0, len)%}
+        <li>
+                {{comments[i][3]}} - By {{comments[i][0]}}. Rated {{comments[i][2]}}
+        </li>
+        {%endfor%}
+</ol>
+{%endif%}
+<p><a href="{{ url_for('books', isbn=isbn) }}">Back</a></p>
+<p><a href="{{ url_for('home') }}">Home</a></p>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>{{user[1]}} {{user[2]}}</title>
+{% endblock %}
+
+{% block body %}
+<h1>This is reserved for user details: {{user[0]}}</h1><br>
+<p>Forename: {{user[1]}} and Surname: {{user[2]}}</p><br>
+<p>Address: {{user[3]}} and Phone Number: {{user[4]}}</p><br>
+<br>
+
+{%if same_user == "False"%}
+<form action="{{ url_for('add_trustworthiness',username=user[0]) }}" method="POST">
+        <select name="trustworthiness">
+                <option value="1">Trustworthy</option>
+                <option value="-1">Untrustworthy</option>
+        </select>
+        <input type="submit" value="Assign Trustworthiness">
+</form>
+{%else%}
+Cannot be assigned
+{%endif%}
+
+{{info}}
+
+<br>
+<p><a href="{{ url_for('all_users') }}">Back</a></p>
+<p><a href="{{ url_for('home') }}">Home</a></p>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>{{book[1]}}</title>
+{% endblock %}
+
+{% block body %}
+<h1>{{book[1]}}</h1><br>
+<p>ISBN13: {{book[0]}} and Title: {{book[1]}}</p><br>
+<p>Written by:
+        {%for x in range(0, len_authors)%}
+        <p><a href="{{ url_for('author', name=authors[x][0]) }}">{{authors[x][0]}}</a></p>
+        {%endfor%}
+</p>
+<p>ISBN10: {{book[2]}} and Language: {{book[3]}}</p><br>
+<p>Number of Pages: {{book[4]}} and Published on: {{book[5]}}</p><br>
+<p>Published by: {{book[6]}}</p><br>
+<p>
+        View comments by usefulness:
+        <form action="{{ url_for('comments_by_usefulness',isbn=book[0]) }}" method="POST">
+                <input type="number" name="limit" min="1">
+                <input type="submit" value="View Comments">
+        </form>
+</p>
+{%if manager == "True"%}
+        <form action="{{ url_for('to_inventory',isbn=book[0]) }}" method="POST">
+                <p>Copies:
+                        <input type="text" name="copies">
+                        at Price:
+                        <input type="text" name="price">
+                        <input type="submit" value="Send to Inventory">
+                </p>
+        </form><br>
+{{info}}
+{%endif%}
+
+
+<h1>Comments on this book:</h1>
+{%if len_c > 0 %}
+<ol>
+        {%for i in range(0, len)%}
+        <li>{{comments[i][3]}} - Comment by <a href="{{ url_for('users',username=comments[i][0]) }}">{{comments[i][0]}}</a>. Rated {{comments[i][2]}} out of 10.
+                {%if user == comments[i][0]%}
+                <form action="{{ url_for('update_comment', isbn=book[0]) }}" method="POST">
+                        <input type="number" name="rating" min="0" max="10">
+                        <input type="text" name="comment_text" maxlength="100" size="100">
+                        <input type="submit" value="Update Comment">
+                </form>
+                {%else%}
+                <form action="{{ url_for('add_usefulness',isbn=book[0],username=comments[i][0]) }}" method="POST">
+                        <select name="usefulness">
+                                <option value="1">Useless</option>
+                                <option value="2">Useful</option>
+                                <option value="3">Very Useful</option>
+                        </select>
+                        <input type="submit" value="Assign Usefulness">
+                </form>
+                {%endif%}
+        </li>
+        {%endfor%}
+</ol>
+{%else%}
+<p>No comments.</p>
+{%endif%}
+<br><br>
+<form action="{{ url_for('add_comment',isbn=book[0]) }}" method="POST">
+        <input type="number" name="rating" min="0" max="10">
+        <input type="text" name="comment_text" maxlength="100" size="100">
+        <input type="submit" value="Add Comment">
+</form>
+{%if len_e > 0%}
+<p>{{error_message}}</p>
+{%endif%}
+<p><a href="{{ url_for('all_books') }}">Back</a></p>
+<p><a href="{{ url_for('home') }}">Home</a></p>
+{% endblock %}

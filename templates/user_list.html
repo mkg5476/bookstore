@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>User List</title>
+{% endblock %}
+
+{% block body %}
+<h1>This is the list of users.</h1><br>
+<ol>
+        {%for i in range(0, len)%}
+        <li><a href="{{ url_for('users', username=users[i][0]) }}">{{users[i][0]}}</a></li>
+        {%endfor%}
+</ol>
+<br>
+<p><a href="{{ url_for('home') }}">Home</a></p>
+
+{% endblock %}

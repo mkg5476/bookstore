@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Registration</title>
+{% endblock %}
+
+{% block body %}
+<h1>You tried to register.</h1><br>
+<form action="/add_book" method="POST">
+        <h2>ISBN13 (Required):</h2><br>
+        <input type="text" name="isbn"><br>
+        <h2>Title (Required):</h2><br>
+        <input type="text" name="title"><br>
+        <h2>Author(s) (Required. Separate multiple authors via only '/'):</h2><br>
+        <input type="text" name="authors"><br>
+        <h2>ISBN10:</h2><br>
+        <input type="text" name="isbn10"><br>
+        <h2>Language:</h2><br>
+        <input type="text" name="language"><br>
+        <h2>Number of Pages:</h2><br>
+        <input type="number" name="num_pages"><br>
+        <h2>Publication Date (MM/DD/YYYY):</h2><br>
+        <input type="date" name="publication_date"><br>
+        <h2>Publisher:</h2><br>
+        <input type="text" name="publisher"><br>
+        <input type="submit" value="Register">
+</form>
+<h1>{{info}}</h1>
+<p><a href="{{ url_for('index') }}">Return to index</a></p>
+{% endblock %}

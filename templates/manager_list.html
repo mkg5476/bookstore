@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Manager List</title>
+{% endblock %}
+
+{% block body %}
+<h1>This is the list of existing managers.</h1><br>
+<ol>
+        {%for i in range(0, len)%}
+        <li><a href="{{ url_for('users', username=managers[i]) }}">{{managers[i]}}</a></li>
+        {%endfor%}
+</ol>
+<br>
+<p><a href="{{ url_for('add_manager') }}">Back</a></p>
+
+{% endblock %}

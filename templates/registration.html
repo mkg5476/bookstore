@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Registration</title>
+{% endblock %}
+
+{% block body %}
+<h1>You tried to register.</h1><br>
+<form action="/user_registration" method="POST">
+        <h2>Username:</h2><br>
+        <input type="text" name="username"><br>
+        <h2>Password</h2><br>
+        <input type="password" name="password"><br>
+        <h2>Forename:</h2><br>
+        <input type="text" name="forename"><br>
+        <h2>Surname:</h2><br>
+        <input type="text" name="surname"><br>
+        <h2>Address:</h2><br>
+        <input type="text" name="address"><br>
+        <h2>Phone Number:</h2><br>
+        <input type="text" name="phone_number"><br>
+        <input type="submit" value="Register">
+</form>
+<h1>{{info}}</h1>
+<p><a href="{{ url_for('index') }}">Return to index</a></p>
+{% endblock %}

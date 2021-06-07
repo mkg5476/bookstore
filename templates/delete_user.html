@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Delete Users</title>
+{% endblock %}
+
+{% block body %}
+<h1>You may delete users here.</h1><br>
+<p>See list of users <a href="{{ url_for('user_list') }}">here</a></p><br>
+<p>Delete these users:
+        <form action="/delete_user" method="POST">
+                <select name="users">
+                        {%for i in range(0, len)%}
+                        <option value={{users[i]}}>{{users[i]}}</option>
+                        {%endfor%}
+                </select>
+                <input type="submit" name="users" value="Delete User">
+        </form>
+</p><br>
+<h2>You selected {{message}}</h2>
+<p><a href="{{ url_for('home') }}">Back</a></p>
+
+{% endblock %}

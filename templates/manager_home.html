@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Home</title>
+{% endblock %}
+
+{% block body %}
+<h1>This shall be manager home.</h1><br>
+<p>{{info}}</p>
+<p><a href="{{ url_for('add_manager')}}">Add Manager</a></p>
+<p><a href="{{ url_for('all_books') }}">All Books</a></p>
+<p><a href="{{ url_for('all_authors') }}">All Authors</a></p>
+<p><a href="{{ url_for('all_users') }}">All Users</a></p>
+<p><a href="{{ url_for('inventory') }}">Inventory</a></p>
+<p><a href="{{ url_for('shopping_cart') }}">Shopping Cart</a></p>
+<p><a href="{{ url_for('past_orders') }}">Past Orders</a></p>
+<p><a href="{{ url_for('add_book') }}">Add New Book</a></p>
+<p><a href="{{ url_for('browse_books') }}">Browse Books</a></p>
+<p><a href="{{ url_for('buying_suggestions') }}">Buying Suggestions</a></p>
+<p><a href="{{ url_for('user_list') }}">User List</a></p>
+<p><a href="{{ url_for('delete_user') }}">Delete User</a></p>
+<p><a href="{{ url_for('user_logout') }}">Logout</a></p>
+{% endblock %}

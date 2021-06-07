@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Browse Books</title>
+{% endblock %}
+
+{% block body %}
+<h1>You may browse books here.</h1><br>
+<p>Note: Kindly use capitalised AND OR for conjunctive queries, failing which, the words shall be treated as keywords. Furthermore, AND and OR must not appear consecutively, which shall be erroneous.</p>
+<br>
+<form action="{{ url_for('browse_books') }}" method="POST">
+        <input type="text" name="query" maxlength="100" size="100">
+        <select name="order">Sort By:
+                <option value="0">None</option>
+                <option value="1">Publish Date - Ascending</option>
+                <option value="2">Publish Date - Descending</option>
+                <option value="3">Avg numerical score of comments - Ascending</option>
+                <option value="4">Avg numerical score of comments - Descending</option>
+                <option value="5">Avg numerical score of trusted feedbacks - Ascending</option>
+                <option value="6">Avg numerical score of trusted feedbacks - Descending</option>
+        </select>
+        <input type="submit" value="Search">
+</form><br>
+{{error_message}}
+<br><br>
+{%if len > 0%}
+<ol>
+        {%for i in range(0, len)%}
+        <li>
+                <a href="{{ url_for('books',isbn=books[i][0]) }}">{{books[i][0]}} {{books[i][1]}}</a>
+        </li>
+        {%endfor%}
+</ol>
+{%endif%}
+<a href="{{ url_for('home') }}">Back</a>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>{{author}}</title>
+{% endblock %}
+
+{% block body %}
+<h1>{{author}}</h1><br>
+<p>Find books:
+        <form action="{{ url_for('author',name=author) }}" method="POST">
+                <select name="manner">
+                        <option value="1">By the author</option>
+                        <option value="2">By the author with a degree of separation of 1</option>
+                        <option value="3">By the author with a degree of separation of 2</option>
+                </select>
+                <input type="submit" value="Find Books">
+        </form>
+</p>
+
+{%if len > 0%}
+<ol>
+        {%for i in range(0, len)%}
+        <li><a href="{{ url_for('books',isbn=books[i][0]) }}">{{books[i][0]}} {{books[i][1]}}</a></li>
+        {%endfor%}
+</ol>
+{%endif%}
+{{info}}
+
+<p><a href="{{ url_for('all_authors') }}">Back</a></p>
+<p><a href="{{ url_for('home') }}">Home</a></p>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Index</title>
+{% endblock %}
+
+{% block body %}
+<h1>This shall be index.</h1><br>
+<p>Previously registered users, kindly login <a href="{{ url_for('user_login') }}">here</a></p>
+<p>New users, register <a href="{{ url_for('user_registration') }}">here</a></p>
+{% endblock %}

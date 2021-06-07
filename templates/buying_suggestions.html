@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Buying Suggestions</title>
+{% endblock %}
+
+{% block body %}
+{%if len > 0%}
+<h1>These are the books suggested for based on other customers' choices.</h1><br>
+<ol>
+        {%for i in range(0, len)%}
+        <li><a href="{{ url_for('author',name=authors[i][0]) }}">{{authors[i][0]}}</a></li>
+        {%endfor%}
+</ol>
+<br>
+{%else%}
+<h1>No suggestions at this time</h1>
+{%endif%}
+<p><a href="{{ url_for('home') }}">Back</a></p>
+
+{% endblock %}
